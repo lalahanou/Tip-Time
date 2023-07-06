@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.StringRes
+import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -111,7 +112,6 @@ fun EditNumberField(
     @StringRes label : Int,
     value: String,
     onValueChange: (String) -> Unit,
-    modifier: Modifier = Modifier
 ) {
     TextField(
         value = value,
@@ -127,10 +127,8 @@ fun EditNumberField(
 /*Une fonction qui accepte le coût du service et le pourcentage de pourboire,
  et renvoie le montant du pourboire
  */
-private fun calculateTip(
-    amount: Double,
-    tipPercent: Double,
-    roundUp: Boolean): String {
+@VisibleForTesting
+internal fun calculateTip(amount: Double, tipPercent: Double, roundUp: Boolean): String {
     var tip = tipPercent / 100 * amount
     if (roundUp)
         tip = kotlin.math.ceil(tip)
